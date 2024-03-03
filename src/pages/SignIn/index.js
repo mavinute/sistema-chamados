@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 
 import { AuthContext } from '../../contexts/auth'
 
-import logoImg from '../../assets/logo-ns.png'
+import logoImg from '../../assets/logo.png'
 
 import { Container } from './styles'
 

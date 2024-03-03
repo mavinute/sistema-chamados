@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/auth'
 
 import { Container } from './styles'
 
-import logoImg from '../../assets/logo-ns.png'
+import logoImg from '../../assets/logo.png'
 
 export function SignUp(){
     const [name, setName] = useState('')
