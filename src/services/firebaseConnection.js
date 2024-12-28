@@ -4,13 +4,12 @@ import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBmtIv87xuMvace40Tj8W4S03Onf9PGmqw",
-  authDomain: "thenote-738be.firebaseapp.com",
-  projectId: "thenote-738be",
-  storageBucket: "thenote-738be.appspot.com",
-  messagingSenderId: "368461232064",
-  appId: "1:368461232064:web:85708f0c6262cb45077a25",
-  measurementId: "G-ZDJFW8KLBM"
+  apiKey: "AIzaSyDXF4e6yOSJBRNvOSChi0UTvqIHCtA-0Zo",
+  authDomain: "ava-estudos.firebaseapp.com",
+  projectId: "ava-estudos",
+  storageBucket: "ava-estudos.appspot.com",
+  messagingSenderId: "670565257026",
+  appId: "1:670565257026:web:cce6e938259414e2c442db"
 };
 
 const app = initializeApp(firebaseConfig)

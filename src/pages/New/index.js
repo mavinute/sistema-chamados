@@ -14,7 +14,7 @@ import { Content } from './styles'
 
 const collectionRef = collection(db, "customers")
 
-export function New(){
+export function New() {
     const { user } = useContext(AuthContext)
     const { id } = useParams()
     const navigate = useNavigate()
@@ -29,97 +29,97 @@ export function New(){
     const [idCustomer, setIdCustomer] = useState(false)
 
     useEffect(() => {
-        async function loadCustomers(){
+        async function loadCustomers() {
             await getDocs(collectionRef)
-            .then((snapshot) => {
-                let list = []
+                .then((snapshot) => {
+                    let list = []
 
-                snapshot.forEach((doc) => {
-                    list.push({
-                        id: doc.id,
-                        nameClient: doc.data().nameClient
+                    snapshot.forEach((doc) => {
+                        list.push({
+                            id: doc.id,
+                            nameClient: doc.data().nameClient
+                        })
                     })
-                })
 
-                if(snapshot.docs.size === 0){
-                    setCustomers([ {id: '1', nameClient: "Nenhum cliente"}])
+                    if (snapshot.docs.size === 0) {
+                        setCustomers([{ id: '1', nameClient: "Nenhum cliente" }])
+                        setLoadCustomer(false)
+                        return
+                    }
+
+                    setCustomers(list)
                     setLoadCustomer(false)
-                    return
-                }
 
-                setCustomers(list)
-                setLoadCustomer(false)
+                    if (id) {
+                        loadId(list)
+                    }
 
-                if(id){
-                    loadId(list)
-                }
-
-            })
-            .catch((err) => {
-                setCustomers([ { id: '1', nameClient: 'Erro ao encontrar' } ])
-                setLoadCustomer(false)
-            })
+                })
+                .catch((err) => {
+                    setCustomers([{ id: '1', nameClient: 'Erro ao encontrar' }])
+                    setLoadCustomer(false)
+                })
         }
 
         loadCustomers()
     }, [id])
 
-    async function loadId(list){
+    async function loadId(list) {
         const docRef = doc(db, "called", id)
 
         await getDoc(docRef)
-        .then((snapshot) => {
-            setSubject(snapshot.data().subject)
-            setStatus(snapshot.data().status)
-            setComplement(snapshot.data().complement)
+            .then((snapshot) => {
+                setSubject(snapshot.data().subject)
+                setStatus(snapshot.data().status)
+                setComplement(snapshot.data().complement)
 
-            let index = list.findIndex(item => item.id === snapshot.data().clientId)
-            setCustomerSelected(index)
-            setIdCustomer(true)
+                let index = list.findIndex(item => item.id === snapshot.data().clientId)
+                setCustomerSelected(index)
+                setIdCustomer(true)
 
-        })
-        .catch((err) => {
-            console.log(err)
-            setCustomers(false)
-        })
+            })
+            .catch((err) => {
+                console.log(err)
+                setCustomers(false)
+            })
     }
 
-    function handleOptionChange(e){
+    function handleOptionChange(e) {
         //console.log(e.target.value)
-        
+
         setStatus(e.target.value)
     }
 
-    function handleChangeSelect(e){
+    function handleChangeSelect(e) {
         //console.log(e.target.value)
 
         setSubject(e.target.value)
     }
 
-    function handleChangeCustomer(e){
+    function handleChangeCustomer(e) {
         setCustomerSelected(e.target.valur)
     }
 
-    async function handleRegister(e){
+    async function handleRegister(e) {
         e.preventDefault()
 
-        if(idCustomer){
+        if (idCustomer) {
             const docRef = doc(db, "called", id)
             await updateDoc(docRef, {
                 complement: complement,
                 status: status,
                 userId: user.uid
             })
-            .then(() => {
-                toast.success("Atualisado com sucesso")
-                setCustomerSelected(0)
-                setComplement('')
-                navigate('/dashboard')
-            })
-            .catch((err) => {
-                toast.error("Erro ao atualizar")
-                console.log(err)
-            })
+                .then(() => {
+                    toast.success("Atualisado com sucesso")
+                    setCustomerSelected(0)
+                    setComplement('')
+                    navigate('/dashboard')
+                })
+                .catch((err) => {
+                    toast.error("Erro ao atualizar")
+                    console.log(err)
+                })
 
             return
         }
@@ -133,29 +133,29 @@ export function New(){
             userId: user.uid,
             subject: subject
         })
-        .then(() => {
-            //console.log(value.id)
-            toast.success("Cadastrado com sucesso")
-            setComplement('')
-            setCustomerSelected(0)
-        })
-        .catch((err) => {
-            console.log(err)
-            toast.error("Erro ao cadastrar chamado")
-        })
+            .then(() => {
+                //console.log(value.id)
+                toast.success("Cadastrado com sucesso")
+                setComplement('')
+                setCustomerSelected(0)
+            })
+            .catch((err) => {
+                console.log(err)
+                toast.error("Erro ao cadastrar chamado")
+            })
     }
-    
-    return(
+
+    return (
         <>
-            <Header/>
+            <Header />
             <Content>
-                <Title name={id ? "Editando chamado" : "Criando chamado"} >
+                <Title name={id ? "Editando Produto" : "Cadastrar Produto"} >
                     <FiCreditCard size={25} />
                 </Title>
                 <div className="container">
                     <form onSubmit={handleRegister}>
-                        <label>Cliente</label>
-                        {loadCustomer ? (
+                        <label>Produto</label>
+                        {/* {loadCustomer ? (
                             <>
                                 <input type='text' disabled={true} value="Carregando..." />
                             </>
@@ -163,29 +163,35 @@ export function New(){
                             <>
                                 <select value={customerSelected} onChange={handleChangeCustomer}>
                                     {customers.map((item, index) => {
-                                        return(
+                                        return (
                                             <option key={index} value={index} >{item.nameClient}</option>
                                         )
                                     })}
                                 </select>
                             </>
-                        )}
+                        )} */}
+                        <input
+                            type="text"
+                            placeholder="Nome do Produto"
+                            value={complement}
+                            onChange={(e) => setComplement(e.target.value)}
+                        />
 
-                        <label>Assunto</label>
+                        <label>Categoria</label>
                         <select value={subject} onChange={handleChangeSelect}>
-                            <option value="Suporte" >Suporte</option>
-                            <option value="Visita Tecnica" >Visita Tecnica</option>
-                            <option value="Financeiro" >Financeiro</option>
+                            <option value="Suporte" >Teste1</option>
+                            <option value="Visita Tecnica" >Teste2</option>
+                            <option value="Financeiro" >Teste3</option>
                         </select>
 
-                        <label>Status</label>
+                        {/* <label>Status</label>
                         <div className="status">
                             <input
                                 type="radio"
                                 name="radio"
                                 value="Aberto"
                                 onChange={handleOptionChange}
-                                checked={status === 'Aberto' }
+                                checked={status === 'Aberto'}
                             />
                             <span>Em aberto</span>
                             <input
@@ -193,7 +199,7 @@ export function New(){
                                 name="radio"
                                 value="Progresso"
                                 onChange={handleOptionChange}
-                                checked={status === 'Progresso' }
+                                checked={status === 'Progresso'}
                             />
                             <span>Progresso</span>
                             <input
@@ -201,19 +207,19 @@ export function New(){
                                 name="radio"
                                 value="Atendido"
                                 onChange={handleOptionChange}
-                                checked={status === 'Atendido' }
+                                checked={status === 'Atendido'}
                             />
                             <span>Atendido</span>
-                        </div>
+                        </div> */}
 
-                        <label>Complemento</label>
+                        <label>Descrição</label>
                         <textarea
                             type="text"
-                            placeholder="Descreva seu problema(opcional)"
+                            placeholder="Descrição do produto"
                             value={complement}
                             onChange={(e) => setComplement(e.target.value)}
                         />
-                        
+
                         <button type='submit' >{id ? "Atualizar" : "Registrar"}</button>
                     </form>
                 </div>

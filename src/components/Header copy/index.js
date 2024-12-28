@@ -5,10 +5,11 @@ import { FiHome, FiTarget, FiUser, FiLogOut } from 'react-icons/fi'
 import { AuthContext } from '../../contexts/auth'
 
 import avatarImg from '../../assets/avatar.png'
+import logoTeste from '../../assets/logo.png'
 
 import { SideBar } from './styles'
 
-export function Header() {
+export function Header2() {
     const { user, logOut } = useContext(AuthContext)
 
     return (
@@ -17,25 +18,14 @@ export function Header() {
                 <img src={user.avatarUrl === null ? avatarImg : user.avatarUrl} alt="foto do perfil" />
             </div> */}
             <div className='background-avatar'>
-                <img src={avatarImg} alt="foto do perfil" />
+                <img src={logoTeste} alt="foto do perfil" />
             </div>
 
-            <Link to="/dashboard">
+            <Link to="/">
                 <FiHome size={25} />
                 Inicio
             </Link>
-            {/* <Link to="/clientes" >
-                <FiTarget size={25} />
-                Clientes
-            </Link> */}
-            <Link to="/perfil">
-                <FiUser size={25} />
-                Perfil
-            </Link>
-            <Link onClick={logOut} >
-                <FiLogOut size={25} />
-                Sair
-            </Link>
+
 
         </SideBar>
     )

@@ -13,7 +13,7 @@ import { Content } from './styles'
 
 const listref = collection(db, "called")
 
-export function Dashboard(){
+export function Dashboard() {
     //const { logOut } = useContext(AuthContext)
 
     const [chamados, setChamados] = useState([])
@@ -24,7 +24,7 @@ export function Dashboard(){
     const [loadingMore, setLoadingMore] = useState(false)
 
     useEffect(() => {
-        async function loadChamados(){
+        async function loadChamados() {
             const q = query(listref, orderBy('created', 'desc'), limit(8))
 
             const querySnaphot = await getDocs(q)
@@ -34,13 +34,13 @@ export function Dashboard(){
 
         loadChamados()
 
-        return () => {}
+        return () => { }
     }, [])
 
-    async function updateStore(querySnapshot){
+    async function updateStore(querySnapshot) {
         const isCollectionEmpty = querySnapshot.size === 0
 
-        if(!isCollectionEmpty){
+        if (!isCollectionEmpty) {
             let list = []
 
             querySnapshot.forEach((doc) => {
@@ -50,14 +50,14 @@ export function Dashboard(){
                     client: doc.data().client,
                     clientId: doc.data().clientId,
                     created: doc.data().created,
-                    createdFormat: format(doc.data().created.toDate(),  'dd/MM/yyyy'),
+                    createdFormat: format(doc.data().created.toDate(), 'dd/MM/yyyy'),
                     status: doc.data().status,
                     complement: doc.data().complement
                 })
             })
 
             setChamados(chamados => [...chamados, ...list])
-        }else{
+        } else {
             setIsEmpty(true)
         }
     }
@@ -79,15 +79,15 @@ export function Dashboard(){
     //         </div>
     //     )
     // }
-    
-    return(
+
+    return (
         <>
-            <Header/>
+            <Header />
             <Content>
                 <Title name="Início">
                     <FiHome size={25} />
                 </Title>
-                
+
                 {/* <div className='container'>
                     <h1>Teste</h1>
                 </div> */}
@@ -100,7 +100,7 @@ export function Dashboard(){
                             Novo Chamado
                         </Link>
                     </div>
-                ):(
+                ) : (
                     <>
                         <Link to="/novo-chamado" className='new'>
                             <FiPlus color='#fff' size={25} />
@@ -110,17 +110,17 @@ export function Dashboard(){
                         <table>
                             <thead>
                                 <tr>
-                                    <th scope='col' >Cliente</th>
-                                    <th scope='col' >Assunto</th>
+                                    <th scope='col' >Pedido</th>
+                                    <th scope='col' >Categoria</th>
                                     <th scope='col' >Status</th>
                                     <th scope='col' >Cadastrado em</th>
                                     <th scope='col' >#</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                                 {chamados.map((item, index) => {
-                                    return(
+                                    return (
                                         <tr key={index}>
                                             <td data-label="Cliente">{item.client}</td>
                                             <td data-label="Assunto">{item.subject}</td>
@@ -141,11 +141,11 @@ export function Dashboard(){
                                         </tr>
                                     )
                                 })}
-                                
+
                             </tbody>
                         </table>
                     </>
-                    
+
                 )}
             </Content>
         </>

@@ -40,54 +40,49 @@ export const Content = styled.div`
         margin-bottom: 10px;
     }
 
-    table {
-        border: 1px solid #ccc;
-        margin: 0;
-        padding: 0;
+    .product-view {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
+        padding: 10px;
 
-        /* caption {
-            font-size: 10px;
-            margin: 5px 0 10px;
-        } */
-
-        tr {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
+        .img {
+            
         }
 
-        th {
-            padding: 5px;
-            align-items: center;
-            font-size: 16px;
-        }
+        .datails {
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            flex-direction: column;
+            gap: 20px;
 
-        td {
-            padding: 10px;
-            text-align: center;
+            strong {
+                font-size: 30px;
+            }
 
-            .action {
+            input {
+                width: 200px;
+                height: 25px;
+                border: 0;
+                border-radius: 5px;
+                padding: 5px;
+            }
+
+            .button {
+                width: 300px;
+                height: 40px;
+                background: #0062be;
+                border: none;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 17px;
+
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                
-                border: 0;
-                padding: 6px;
-                border-radius: 5px;
-                display: inline-block;
-                margin-right: 3px;
 
-                svg {
-                    vertical-align: middle;
-                }
-            }
-
-            .badge {
-                padding: 3px;
-                border-radius: 3px;
-                color: #fff;
+                text-decoration: none;
             }
         }
     }

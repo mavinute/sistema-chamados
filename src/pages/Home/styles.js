@@ -40,54 +40,47 @@ export const Content = styled.div`
         margin-bottom: 10px;
     }
 
-    table {
-        border: 1px solid #ccc;
-        margin: 0;
-        padding: 0;
+    .grid-products{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        
         width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
 
-        /* caption {
-            font-size: 10px;
-            margin: 5px 0 10px;
-        } */
-
-        tr {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            padding: 5px;
-            align-items: center;
-            font-size: 16px;
-        }
-
-        td {
+        .product {
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
             padding: 10px;
-            text-align: center;
+            background: #fff;
+            margin: 10px;
 
-            .action {
+            .data-product {
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                
-                border: 0;
-                padding: 6px;
-                border-radius: 5px;
-                display: inline-block;
-                margin-right: 3px;
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
 
-                svg {
-                    vertical-align: middle;
+                .action {
+                    width: 100%;
+                    height: 30px;
+                    background: #0063be;
+                    border: 0;
+                    border-radius: 5px;
+                    size: 15px;
+                    color: #fff;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
 
-            .badge {
-                padding: 3px;
-                border-radius: 3px;
-                color: #fff;
+            img {
+                width: 200px;
+                height: 180px;
+                margin-bottom: 12px;
             }
         }
     }
